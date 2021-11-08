@@ -32,12 +32,8 @@ const GameScreen = (props) => {
 
     const [pastGuesses, setPastGuesses] = useState([initialGuess.toString()]);
 
-    const [availableDeviceWidth, setAvailableDeviceWidth] = useState(
-        Dimensions.get('window').width
-      );
-      const [availableDeviceHeight, setAvailableDeviceHeight] = useState(
-        Dimensions.get('window').height
-      );
+    const [availableDeviceWidth, setAvailableDeviceWidth] = useState(Dimensions.get('window').width);
+    const [availableDeviceHeight, setAvailableDeviceHeight] = useState(Dimensions.get('window').height);
 
     const currentLow = useRef(1);
     const currentHigh = useRef(100);
@@ -119,7 +115,7 @@ const GameScreen = (props) => {
         <View style={styles.screen}>
             <Text style={DefaultStyles.bodyText}>Opponent's Guess</Text>
             <NumberContainer>{currentGuess}</NumberContainer>
-            <Card style={[...styles.buttonContainer, {marginTop: availableHeight > 600 ? 20 : 5}]}>
+            <Card style={styles.buttonContainer}>
                 <MainButton onPress={nextGuessHandler.bind(this, 'lower')}>
                     <Ionicons name="md-remove" size={24} color="white" />
                 </MainButton>
@@ -151,11 +147,12 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        width: 400,
-        maxWidth: '90%'
-      },
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      marginTop: Dimensions.get('window').height > 600 ? 20 : 5,
+      width: 400,
+      maxWidth: '90%'
+    },
     listItem: {
         borderColor: '#ccc',
         borderWidth: 1,
